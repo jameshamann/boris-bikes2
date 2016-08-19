@@ -11,15 +11,12 @@ describe DockingStation do
       expect(subject.release_bike).to eq bike
     end
 
-    it 'should raise an error if no bikes' do
-      expect {subject.release_bike}.to raise_error('no bikes available!')
-      # using {} to evaluate a block of code as opposed to () which allows us to evaluate a value
-    end
 
     it 'Only releases working bikes' do
       bike = Bike.new
+      bike.report_broken
       subject.dock(bike)
-      expect(subject).to be_working #FAILED TEST NEEDS FIXING
+      expect{subject.release_bike}.to raise_error(RuntimeError)
     end
 
   end
