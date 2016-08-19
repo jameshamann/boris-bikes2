@@ -17,9 +17,9 @@ class DockingStation
   end
 
   def release_bike
-    working_bikes = @bikes.select{|bike| bike.working?}
-    fail 'This bike is broken' if working_bikes.empty?
-    working_bikes.pop
+    fail 'No bikes available' if empty?
+    fail 'This bike is broken' if bikes[-1].broken?
+    bikes.pop
   end
 
 attr_reader :bikes
